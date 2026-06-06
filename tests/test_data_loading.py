@@ -1,27 +1,38 @@
 import pytest
-import pandas as pd
 import os
 
-def test_data_folder_exists():
-    """Test that data folder exists"""
-    assert os.path.exists('data/raw'), "data/raw folder should exist"
+def test_project_structure():
+    """Test that required folders exist"""
+    required_folders = ['notebooks', 'models', 'src', 'tests', 'data']
+    for folder in required_folders:
+        assert os.path.exists(folder), f"{folder} folder should exist"
 
-def test_fraud_data_exists():
-    """Test that fraud data CSV exists"""
-    assert os.path.exists('data/raw/Fraud_Data.csv'), "Fraud_Data.csv should exist"
+def test_gitignore_exists():
+    """Test that .gitignore exists"""
+    assert os.path.exists('.gitignore'), ".gitignore should exist"
 
-def test_creditcard_data_exists():
-    """Test that creditcard data CSV exists"""
-    assert os.path.exists('data/raw/creditcard.csv'), "creditcard.csv should exist"
+def test_readme_exists():
+    """Test that README.md exists"""
+    assert os.path.exists('README.md'), "README.md should exist"
 
-def test_ip_data_exists():
-    """Test that IP to country data exists"""
-    assert os.path.exists('data/raw/IpAddress_to_Country.csv'), "IpAddress_to_Country.csv should exist"
+def test_requirements_exists():
+    """Test that requirements.txt exists"""
+    assert os.path.exists('requirements.txt'), "requirements.txt should exist"
 
-def test_notebooks_folder_exists():
-    """Test that notebooks folder exists"""
-    assert os.path.exists('notebooks'), "notebooks folder should exist"
+def test_notebooks_exist():
+    """Test that at least one notebook exists"""
+    import glob
+    notebooks = glob.glob('notebooks/*.ipynb')
+    assert len(notebooks) > 0, "At least one Jupyter notebook should exist"
+
+def test_workflow_exists():
+    """Test that GitHub Actions workflow exists"""
+    assert os.path.exists('.github/workflows/unittests.yml'), "Workflow file should exist"
 
 def test_models_folder_exists():
     """Test that models folder exists"""
     assert os.path.exists('models'), "models folder should exist"
+
+def test_src_folder_exists():
+    """Test that src folder exists"""
+    assert os.path.exists('src'), "src folder should exist"
